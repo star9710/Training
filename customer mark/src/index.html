@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fans today</title>
+    <link rel="stylesheet" href="../css/powderToday.css">
+    <link rel="stylesheet" href="../css/reset.css">
+</head>
+
+<body>
+    <div class="fansToday">
+        <div class="search">
+            <div class="searchBorder">
+                <img src="../images/search_icon.png" alt="">
+                <input type="text" placeholder="请输入昵称查找" autofocus>
+            </div>
+        </div>
+        <div class="enterFns">
+            <div class="fanslist">
+                <img class="select selectNoBlue" src="../images/select_is.png" alt="">
+                <img class="select selectNo" src="../images/select_no.png" alt="">
+                <img class="select selectIsBlue selectNone" src="../images/select_is_1.png" alt="">
+                <img class="select selectIs selectNone" src="../images/select_no_1.png" alt="">
+                <img class="historyIcon" src="../images/history_icon.png" alt="">
+                <img class="nowIcon" src="../images/now_icon.png" alt="">
+                <p class="historyText">今日进粉</p>
+                <p class="nowText">历史进粉</p>
+            </div>
+            <div class="fansShow">
+                <div class="fansNum">今日进粉数：<span>22</span></div>
+                <div id="information">
+                    <div class="fansInformation">
+                        <img class="avatar" src="../images/1.png" alt="">
+                        <div id="information" class="information">
+                            <div class="name">花开富贵</div>
+                            <div class="city">江苏无锡市</div>
+                            <div class="time">2023-08-23 19:00</div>
+                        </div>
+                        <div class="report" @click="reportPopups">上报</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 上报弹窗 -->
+    <div class="reportPop-ups">
+        <img class="reportClose" src="../images/close.png" alt="">
+        <div class="reportBack">
+            <div class="ConfirmReport">
+                <div class="reportTitle">下拉选择上报类型</div>
+                <img class="downIcon" src="../images/down_icon.png" alt="">
+            </div>
+            <div class="reportBut">确认上报</div>
+            <div class="reportline"></div>
+            <div class="reportRecordBack">
+                <div class="reportRecord">
+                    <div class="recordTitle">上报记录</div>
+                    <div id="recordTitle">
+                        <div><span>1、上报 </span><span> 有效沟通 </span><span>2023-08-23 16:00</span></div>
+                        <div><span>2、上报 </span><span> 开单 </span><span>2023-08-23 16:00</span></div>
+                        <div><span>3、上报 </span><span> 有效沟通删除粉 </span><span>2023-08-23 16:00</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script type="text/javascript" src="../js/powderToday.js"></script>
+
+
+</html>

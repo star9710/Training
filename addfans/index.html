@@ -1,0 +1,256 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/index.css">
+  <title>加粉记录</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="record-top">
+      <!-- 搜索 -->
+      <div class="search">
+        <input type="text" class="searchInput" placeholder="请输入昵称查找" v-model="keyword" @change="changeKeyword">
+        <img src="images/search_icon.png" alt="搜索" class="searchIcon">
+      </div>
+      <!-- tab 切换 -->
+      <div class="record-tabs">
+        <div class="record-tabs-1" @click="changeTab(0)" :class="[nowTabIndex === 0?'on':'slect1bj1']">
+          <img v-if="nowTabIndex === 0" :src="tabs[0].iconUrl" alt="">
+          <img v-else :src="tabs[0].noIconUrl" alt="">
+          <div>{{tabs[0].title}}</div>
+        </div>
+        <div class="record-tabs-1" @click="changeTab(1)" :class="[nowTabIndex === 1?'on1':'slect1bj']">
+          <img v-if="nowTabIndex === 1" :src="tabs[1].iconUrl" alt="">
+          <img v-else :src="tabs[1].noIconUrl" alt="">
+          <div>{{tabs[1].title}}</div>
+        </div>
+      </div>
+    </div>
+    <!-- 进粉列表 -->
+    <div class="record-content">
+      <!-- 总数 -->
+      <div class="record-content-total">
+        {{totalInfo}}
+      </div>
+      <!-- 列表 -->
+      <div class="record-content-list">
+        <div class="list-item" v-for="(item,index) in addFansList" :key="item">
+          <div class="list-item-left">
+            <div class="list-item-left-avatur">
+              <img :src="item.profile" alt="">
+            </div>
+            <div class="list-item-left-info">
+              <div class="list-item-left-info-1">{{item.name}}</div>
+              <div class="list-item-left-info-2">{{item.address}}</div>
+              <div class="list-item-left-info-2">{{item.times}}</div>
+            </div>
+          </div>
+          <div class="list-item-right" v-if="item.isReport" style="background-color:#f5f5f5;">
+            已上报
+          </div>
+          <div class="list-item-right" v-else @click="showModalToast(item.id,index)">
+            上报
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div @click="loadMore" class="addMore">点击加载更多</div>
+    </div>
+    <!-- 弹窗 -->
+    <div class="modal" v-if="showModal">
+      <div class="comfireReport">
+        <img src="images/close.png" alt="" class="closeModal" @click="closeModal">
+        <div style="position:relative;">
+          <div class="selector" @click="toggleDropdown">
+            {{ selected }}
+            <img src="images/down_icon.png" alt="" class="downSelsec">
+          </div>
+          <transition name="dropdown">
+            <div class="options" v-show="isDropdownVisible">
+              <div class="option" v-for="option in options" :key="option" @click="selectOption(option)">
+                {{ option }}
+              </div>
+            </div>
+          </transition>
+        </div>
+        <!-- btn 上报 -->
+        <div class="reportBtn" @click="submitReport">
+          确认上报
+        </div>
+        <!-- 分割线 -->
+        <div class="fengexian"></div>
+        <div class="reportTitle">上报记录</div>
+        <div class="reportIsList">
+          <div class="reportIsList-item" v-for="(item,index) in reportList" :key="item.id">
+            <div class="reportIsList-item-left">
+              {{index+1}}、 上报 {{item.title}}
+            </div>
+            <div class="reportIsList-item-right">
+              {{item.time}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/flex.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script type="text/javascript">
+    new Vue({
+      el: "#app",
+      data() {
+        return {
+          keyword: "",
+          tabs: [
+            { id: 1, title: "今日进粉", iconUrl: "images/now_icon.png", noIconUrl: "images/history_icon_1.png" },
+            { id: 2, title: "历史进粉", iconUrl: "images/now_icon_1.png", noIconUrl: "images/history_icon.png" },
+          ],
+          nowTabIndex: 0,
+          addFansList: [],
+          totalInfo: "",
+          showModal: false,
+          isDropdownVisible: false,
+          selected: '下拉选择上报类型',
+          options: ['拉黑粉', '重粉', '高危人群', '推广粉', '其他异常粉', '有效沟通', '有效报价', '开单', '有效沟通删除粉', '无效沟通删除粉'],
+          reportList: [
+            { id: 1, title: "有效沟通", time: "2023/08/24 08:06" },
+            { id: 1, title: "有效沟通", time: "2023/08/24 08:06" },
+            { id: 1, title: "有效沟通", time: "2023/08/24 08:06" },
+            { id: 1, title: "有效沟通", time: "2023/08/24 08:06" },
+            { id: 1, title: "有效沟通", time: "2023/08/24 08:06" },
+            { id: 1, title: "有效沟通", time: "2023/08/24 08:06" },
+            { id: 1, title: "有效沟通", time: "2023/08/24 08:06" },
+            { id: 1, title: "有效沟通", time: "2023/08/24 08:06" }
+          ]
+        }
+      },
+      mounted() {
+        const that = this;
+        let Data = [
+          { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+          { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true },
+          { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+          { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true },
+          { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+          { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true },
+          { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+          { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true },
+          { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+          { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true },
+          { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+          { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true },
+        ];
+        let Data1 = [
+          { id: 1, profile: "images/1.png", name: "花开富贵345", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+          { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true }
+        ];
+        if (that.nowTabIndex === 0) {
+          that.totalInfo = "今日进粉总数" + "22";
+          that.addFansList = Data
+        } else {
+          that.totalInfo = "历史进粉总数" + "22";
+          that.addFansList = Data1
+        }
+
+        // 滚动加载
+        // window.onscroll = (e) => {
+        //   const scrollH = document.documentElement.scrollHeight;// 文档的完整高度 
+        //   const scrollT = document.documentElement.scrollTop || document.body.scrollTop; // 当前滚动条的垂直偏移 
+        //   const screenH = window.screen.height;  // 屏幕可视高度 ;
+        //   if (scrollH - scrollT - screenH == 0) {
+        //     //执行请求接口
+        //     //判断若下一页没有则截停
+        //     let moreData = [
+        //       { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+        //       { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true }
+        //     ];
+        //     that.addFansList = that.addFansList.concat(moreData)
+
+        //   }
+        // }
+      },
+      methods: {
+        // 关键字搜索
+        changeKeyword(event) {
+          const that = this
+          if (that.nowTabIndex === 0) {
+            // 今日进粉
+            that.addFansList = [
+              { id: 1, profile: "images/1.png", name: "12", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+            ]
+          } else {
+            // 历史进粉
+            that.addFansList = [
+              { id: 1, profile: "images/1.png", name: "18", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+            ]
+          }
+
+        },
+        // 点击加载更多
+        loadMore() {
+          const that = this;
+          let moreData = [
+            { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+            { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true }
+          ];
+          that.addFansList = that.addFansList.concat(moreData)
+        },
+        changeTab(index) {
+          const that = this;
+          that.nowTabIndex = -1;
+          that.nowTabIndex = index;
+          that.addFansList = [];
+          let Data = [
+            { id: 1, profile: "images/1.png", name: "花开富贵112", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+            { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true }
+          ];
+          let Data1 = [
+            { id: 1, profile: "images/1.png", name: "花开富贵345", address: "山东省济南市", times: "2023-08-24 14:23", isReport: false },
+            { id: 2, profile: "images/1.png", name: "花开富贵", address: "山东省济南市", times: "2023-08-24 14:23", isReport: true }
+          ];
+          if (that.nowTabIndex === 0) {
+            that.totalInfo = "今日进粉总数" + "22";
+            that.addFansList = Data
+          } else {
+            that.totalInfo = "历史进粉总数" + "22";
+            that.addFansList = Data1
+          }
+        },
+        toggleDropdown() {
+          const that = this;
+          that.isDropdownVisible = !that.isDropdownVisible
+        },
+        selectOption(option) {
+          const that = this;
+          that.selected = option
+          that.isDropdownVisible = false
+        },
+        closeModal() {
+          const that = this;
+          that.showModal = false
+        },
+        showModalToast(id, index) {
+          console.log(id);
+          console.log(index);
+          const that = this;
+          that.showModal = true
+        },
+        submitReport() {
+          const that = this;
+          //确认上报
+          console.log("上报类型" + that.selected)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

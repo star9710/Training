@@ -1,0 +1,251 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #0083EE;
+}
+
+.search {
+    width: 100%;
+    height: 3.1rem;
+    margin: 1.4rem 0;
+}
+
+.searchBorder {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+    /* 居中 */
+    border-radius: 1.8rem;
+}
+
+.searchBorder img {
+    position: absolute;
+    left: 0.8rem;
+    top: 0.6rem;
+    width: 1.9rem;
+}
+
+.searchBorder input {
+    position: absolute;
+    left: 3rem;
+    top: 1rem;
+    font-size: 1rem;
+}
+
+
+.enterFns {
+    position: relative;
+}
+
+
+.select {
+    width: 14.5rem;
+}
+
+.selectNo,
+.selectIsBlue {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.selectNoBlue,
+.selectIs {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.selectNone {
+    display: none;
+}
+
+.historyIcon {
+    position: absolute;
+    top: 0.8rem;
+    right: 9rem;
+    width: 1.9rem;
+}
+
+.nowIcon {
+    position: absolute;
+    top: 0.8rem;
+    left: 2.5rem;
+    width: 1.9rem;
+}
+
+.historyText {
+    position: absolute;
+    top: 1rem;
+    left: 5rem;
+    color: #707070;
+    font-size: 1.2rem;
+}
+
+.nowText {
+    position: absolute;
+    top: 1rem;
+    right: 3.5rem;
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.fansShow {
+    position: absolute;
+    top: 3.6rem;
+    background-color: #F9F9F9;
+    width: 100%;
+}
+
+.fansNum {
+    margin: 0.6rem 1rem;
+    color: #707070;
+}
+
+.fansInformation {
+    display: flex;
+    width: 92%;
+    /* height: 5rem; */
+    margin: 0.4rem auto;
+    background: rgba(255, 255, 255, 0.39);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.11);
+    opacity: 1;
+    border-radius: 1rem;
+}
+
+.fansInformation .avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 1rem 1rem;
+}
+
+.information {
+    margin: auto 0.1rem;
+}
+
+.information .name {
+    font-size: 1.1rem;
+    font-family: PingFang SC;
+    font-weight: bold;
+    line-height: 1.5rem;
+    color: #000000;
+    opacity: 1;
+}
+
+.report {
+    margin: auto;
+}
+
+.city,
+.time {
+    font-size: 0.9rem;
+    font-family: PingFang SC;
+    font-weight: 500;
+    line-height: 1.2rem;
+    color: #565656;
+    opacity: 1;
+}
+
+.report {
+    padding: 0.3rem 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #0083EE;
+    font-family: PingFang SC;
+    border-radius: 5rem;
+    color: #ffffff;
+    letter-spacing: 0.3rem;
+}
+
+.reportPop-ups {
+    position: fixed;
+    top: 13rem;
+    left: 2rem;
+    z-index: 100;
+    width: 85%;
+    margin: auto;
+}
+
+.reportClose {
+    position: fixed;
+    top: 12rem;
+    right: 2rem;
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.reportBack {
+    position: relative;
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+
+}
+
+.ConfirmReport {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reportTitle {
+    margin: 1rem 1.5rem 1rem;
+    font-size: 1.1rem;
+    font-family: PingFang SC;
+    font-weight: bold;
+    /* line-height: 2rem; */
+    color: #000000;
+}
+
+.downIcon {
+    margin: 1rem 2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.reportBut {
+    width: 85%;
+    background-color: #0083ee;
+    border-radius: 10px;
+    margin: 0 auto 1rem;
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+    color: #FFFFFF;
+    letter-spacing: 0.2em;
+}
+
+.reportline {
+    width: 80%;
+    margin: auto;
+    border-bottom: 0.1px solid #aeaeae;
+    padding: 0.1rem;
+}
+
+.recordTitle {
+    margin: 1rem 1.5rem 0;
+    font-size: 1.1rem;
+    font-family: PingFang SC;
+    font-weight: bold;
+    line-height: 2rem;
+    color: #000000;
+
+}
+
+.reportRecord {
+    padding-bottom: 1.2rem;
+}
+
+#recordTitle {
+    width: 85%;
+    margin: auto;
+    font-size: 0.7rem;
+    border: 1px solid #aeaeae;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+#recordTitle>div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.2rem 0;
+}
