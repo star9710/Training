@@ -44,7 +44,7 @@ let infor = [
 ]
 
 function showList(userList) {
-    console.log("showList")
+    // console.log("showList")
     var tmpStr = ""
     for (let index = 0; index < userList.length; index++) {
         tmpStr +=
@@ -55,7 +55,7 @@ function showList(userList) {
             <div class="city">`+ userList[index].city + `</div>
             <div class="time">`+ userList[index].time + `</div>
         </div>
-        <div class="report" @click="reportPopups">上报</div>
+        <div class="report">上报</div>
     </div>
         `
     }
@@ -64,8 +64,20 @@ function showList(userList) {
 }
 showList(infor)
 
+// 使用addEventListener方法来绑定一个点击事件
+// 获取要绑定点击事件的HTML元素
+var reportBtn = document.getElementsByClassName("report")
 
-// 上报弹窗按钮
-function reportPopups() {
+// 绑定点击事件
+for (var i = 0; i < reportBtn.length; i++) {
+    reportBtn[i].addEventListener("click", function () {
+        // 在这里添加点击事件的处理逻辑
+        // console.log("reportPopups");
+        // document.getElementsByClassName("reportPop-ups").style.display = "block";
 
+
+        var myElement = document.getElementsByClassName("reportPop-ups");
+        console.log(myElement);
+    });
 }
+

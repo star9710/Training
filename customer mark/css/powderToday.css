@@ -160,6 +160,7 @@ body {
 }
 
 .reportPop-ups {
+    display: none;
     position: fixed;
     top: 13rem;
     left: 2rem;
