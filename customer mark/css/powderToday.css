@@ -160,6 +160,8 @@ body {
 }
 
 .reportPop-ups {
+    z-index: 1000;
+    /* 位于蒙层之上 */
     display: none;
     position: fixed;
     top: 13rem;
@@ -169,19 +171,22 @@ body {
     margin: auto;
 }
 
-.reportClose {
-    position: fixed;
-    top: 12rem;
-    right: 2rem;
-    width: 1.3rem;
-    height: 1.3rem;
-}
-
 .reportBack {
     position: relative;
     background-color: #FFFFFF;
     border-radius: 1rem;
 
+}
+
+.reportClose {
+    position: absolute;
+    /* 使用相对定位 */
+    top: -1.3rem;
+    /* 负值表示在上方偏移 */
+    right: -1.3rem;
+    /* 负值表示在右侧偏移 */
+    width: 1.3rem;
+    height: 1.3rem;
 }
 
 .ConfirmReport {
@@ -249,4 +254,18 @@ body {
     display: flex;
     justify-content: space-between;
     margin: 0.2rem 0;
+}
+
+/* 蒙层样式 */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 半透明背景色 */
+    z-index: 999;
+    /* 位于其他内容之上 */
 }

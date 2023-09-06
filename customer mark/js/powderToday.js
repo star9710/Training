@@ -70,14 +70,15 @@ var reportBtn = document.getElementsByClassName("report")
 
 // 绑定点击事件
 for (var i = 0; i < reportBtn.length; i++) {
-    reportBtn[i].addEventListener("click", function () {
-        // 在这里添加点击事件的处理逻辑
-        // console.log("reportPopups");
-        // document.getElementsByClassName("reportPop-ups").style.display = "block";
-
-
-        var myElement = document.getElementsByClassName("reportPop-ups");
-        console.log(myElement);
-    });
+    (function (index) {
+        reportBtn[index].addEventListener("click", function () {
+            // 在这里添加点击事件的处理逻辑
+            // console.log("reportPopups");
+            var reportPopUps = document.getElementsByClassName("reportPop-ups")[index];
+            reportPopUps.style.display = "block";
+        });
+    })(i);
 }
 
+// 获取弹窗蒙层
+const overlay = document.getElementById("overlay");
