@@ -68,6 +68,9 @@ showList(infor)
 // 获取要绑定点击事件的HTML元素
 var reportBtn = document.getElementsByClassName("report")
 
+// 获取弹窗蒙层
+const overlay = document.getElementById("overlay");
+
 // 绑定点击事件
 for (var i = 0; i < reportBtn.length; i++) {
     (function (index) {
@@ -76,9 +79,18 @@ for (var i = 0; i < reportBtn.length; i++) {
             // console.log("reportPopups");
             var reportPopUps = document.getElementsByClassName("reportPop-ups")[index];
             reportPopUps.style.display = "block";
+
+            var reportOverlay = document.getElementById("overlay")[index];
+            reportOverlay.style.display = "block";
         });
     })(i);
 }
 
-// 获取弹窗蒙层
-const overlay = document.getElementById("overlay");
+
+const reportPopUps = document.querySelector(".reportPop-ups");
+
+// 当需要关闭弹出框时隐藏蒙层和弹出框
+// document.getElementById("closeButtonId").addEventListener("click", () => {
+//     overlay.style.display = "none";
+//     reportPopUps.style.display = "none";
+// });
