@@ -80,14 +80,12 @@ for (var i = 0; i < reportBtn.length; i++) {
             var reportPopUps = document.getElementsByClassName("reportPop-ups")[index];
             reportPopUps.style.display = "block";
 
-            var reportOverlay = document.getElementById("overlay")[index];
-            reportOverlay.style.display = "block";
+            overlay.style.display = "block";
         });
     })(i);
 }
 
 
-const reportPopUps = document.querySelector(".reportPop-ups");
 
 // 当需要关闭弹出框时隐藏蒙层和弹出框
 // document.getElementById("closeButtonId").addEventListener("click", () => {
